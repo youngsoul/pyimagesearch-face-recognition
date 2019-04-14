@@ -4,11 +4,21 @@ import pickle
 import argparse
 import cv2
 
+"""
+Example images:
+
+"""
+example_images = [
+    "/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/examples/example_01.png",
+    "/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/examples/example_02.png",
+    "/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/examples/example_03.png",
+    "/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/examples/pr1.jpg"
+]
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=False,
-                default="/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/examples/example_03.png",
+                default=example_images[1],
                 help="path to input image")
-ap.add_argument("-e", "--encodings-file", required=False, default='encodings/jpark.pkl',
+ap.add_argument("-e", "--encodings-file", required=False, default='encodings/face_training_encodings.pkl',
                 help="path to serialized db of facial encodings")
 ap.add_argument("-m", "--detection-method", type=str, default='hog',
                 help="face detection model to use: either 'hog' or 'cnn' ")

@@ -9,8 +9,8 @@ import argparse
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-d", "--dataset", required=False, default="/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/dataset", help="path to input dataset directory")
-ap.add_argument("-e", "--encodings-file", required=True, help="path to serialized db of facial encodings")
-ap.add_argument("-m", "--detection-method", type=str, default='cnn', help="face detection model to use: either 'hog' or 'cnn' ")
+ap.add_argument("-e", "--encodings-file", required=False, default='encodings/face_training_encodings.pkl', help="path to serialized db of facial encodings")
+ap.add_argument("-m", "--detection-method", type=str, default='hog', help="face detection model to use: either 'hog' or 'cnn' ")
 
 
 def get_command_line_args():

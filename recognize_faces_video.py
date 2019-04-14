@@ -6,6 +6,7 @@ import cv2
 from imutils.video import VideoStream
 import imutils
 import time
+import os
 
 """
 This file assumes the MacBackup drive is connected.
@@ -14,11 +15,11 @@ This file assumes the MacBackup drive is connected.
 
 """
 ap = argparse.ArgumentParser()
-ap.add_argument("-e", "--encodings-file", required=False, default='encodings/jpark.pkl',
+ap.add_argument("-e", "--encodings-file", required=False, default='encodings/face_training_encodings.pkl',
                 help="path to serialized db of facial encodings")
 ap.add_argument("-m", "--detection-method", type=str, default='hog',
                 help="face detection model to use: either 'hog' or 'cnn' ")
-ap.add_argument("-o", "--output", type=str, required=False, help="path to output video")
+ap.add_argument("-o", "--output", type=str, required=False, help="path to output video DO NOT ADD EXTENSION.  E.g. output/my_test")
 ap.add_argument("-y", "--display", type=int, default=1, help="whether or not to display output frame to screen")
 ap.add_argument("-i", "--input", type=str, required=False,
                 default='/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/videos/lunch_scene.mp4',
@@ -32,10 +33,14 @@ data = pickle.loads(open(args['encodings_file'], "rb").read())
 
 # initialize the video stream and pointer to output video file, then allow the camera
 # sensor to warm up
-if args['input'] is None:
+print(f"Input: {args['input']}")
+video_file = False
+if args['input'] == 'camera':
     print("[INFO] starting video stream...")
     vs = VideoStream(src=0).start()
 else:
+    print("[INFO] using video file...")
+    video_file = True
     vs = cv2.VideoCapture(args['input'])
 
 writer = None
@@ -44,9 +49,12 @@ time.sleep(0.2)
 # loop over frames from the vdeo file stream
 while True:
     # grab the frame from the threaded video stream
-    (grabbed, frame) = vs.read()
-    if not grabbed:
-        break
+    if video_file:
+        (grabbed, frame) = vs.read()
+        if not grabbed:
+            break
+    else:
+        frame = vs.read()
 
     # convert the input frame from BGR to RGB then resize it to have a width
     # of 750px (to speedup processing)
@@ -86,8 +94,15 @@ while True:
 
     # loop over the recognized faces
     for ((top, right, bottom, left), name) in zip(boxes, names):
+        # rescale the face coordinates
+        top = int(top * r)
+        right = int(right * r)
+        bottom = int(bottom * r)
+        left = int(left * r)
+
         # draw the predicted face name on the image
-        cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
+        cv2.rectangle(frame, (left, top), (right, bottom),
+                      (0, 255, 0), 2)
         y = top - 15 if top - 15 > 15 else top + 15
         cv2.putText(frame, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX,
                     0.75, (0, 255, 0), 2)
@@ -115,8 +130,17 @@ while True:
             break
 
 # close the video file pointers
-vs.release()
+try:
+    if video_file:
+        vs.release()
+except:
+    pass
 
 # check to see if the video writer point needs to be released
 if writer is not None:
     writer.release()
+
+if args['output']:
+    # for some reason, we cannot write the file with the .mp4 extension so we write it without the extension
+    # but to get quicktime to play it, the file has to have the .mp4 extension.
+    os.rename(args['output'], f"{args['output']}.mp4")
