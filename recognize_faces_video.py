@@ -23,7 +23,7 @@ ap.add_argument("-o", "--output", type=str, required=False, help="path to output
 ap.add_argument("-y", "--display", type=int, default=1, help="whether or not to display output frame to screen")
 ap.add_argument("-i", "--input", type=str, required=False,
                 default='/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/videos/lunch_scene.mp4',
-                help="path to input video")
+                help="path to input video or the word camera to capture video from webcam")
 
 args = vars(ap.parse_args())
 
