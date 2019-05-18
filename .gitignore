@@ -195,3 +195,4 @@ fabric.properties
 .idea/httpRequests
 
 /output/
+/encodings/friends_family_encodings.pkl
