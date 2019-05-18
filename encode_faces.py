@@ -8,9 +8,9 @@ import os
 import argparse
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-d", "--dataset", required=False, default="/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/dataset", help="path to input dataset directory")
-ap.add_argument("-e", "--encodings-file", required=False, default='encodings/face_training_encodings.pkl', help="path to serialized db of facial encodings")
-ap.add_argument("-m", "--detection-method", type=str, default='hog', help="face detection model to use: either 'hog' or 'cnn' ")
+ap.add_argument("-d", "--dataset", required=False, default="/Volumes/MacBackup/friends_family", help="path to input dataset directory")
+ap.add_argument("-e", "--encodings-file", required=False, default='encodings/friends_family_encodings.pkl', help="path to serialized db of facial encodings")
+ap.add_argument("-m", "--detection-method", type=str, default='cnn', help="face detection model to use: either 'hog' or 'cnn' ")
 
 
 def get_command_line_args():
@@ -55,7 +55,7 @@ for (i, imagePath) in enumerate(imagePaths):
         knownNames.append(name)
 
 e = time.time()
-print(f"Encoding dataset took: {(e-s)}/60 minutes")
+print(f"Encoding dataset took: {(e-s)/60} minutes")
 # dump the facial encodings + names to disk
 print("[INFO] serializing encodings...")
 data = {"encodings": knownEncodings, "names": knownNames}
