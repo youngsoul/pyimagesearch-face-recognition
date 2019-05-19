@@ -13,9 +13,12 @@ This file assumes the MacBackup drive is connected.
 
 --encodings-file encodings/jpark.pkl --output output/webcam_output.avi --display 1
 
+To test using laptop video camera:
+--encodings-file encodings/jpark.pkl --input camera
+
 """
 ap = argparse.ArgumentParser()
-ap.add_argument("-e", "--encodings-file", required=False, default='encodings/face_training_encodings.pkl',
+ap.add_argument("-e", "--encodings-file", required=False, default='encodings/friends_family_encodings.pkl',
                 help="path to serialized db of facial encodings")
 ap.add_argument("-m", "--detection-method", type=str, default='hog',
                 help="face detection model to use: either 'hog' or 'cnn' ")
@@ -23,7 +26,7 @@ ap.add_argument("-o", "--output", type=str, required=False, help="path to output
 ap.add_argument("-y", "--display", type=int, default=1, help="whether or not to display output frame to screen")
 ap.add_argument("-i", "--input", type=str, required=False,
                 default='/Volumes/MacBackup/PyImageSearch/face-recognition-opencv/videos/lunch_scene.mp4',
-                help="path to input video or the word camera to capture video from webcam")
+                help="path to input video or the word 'camera' to capture video from webcam")
 
 args = vars(ap.parse_args())
 
