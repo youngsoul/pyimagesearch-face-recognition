@@ -1,1 +1,1 @@
-python recognize_faces_video.py --encodings-file encodings/faceaug_encodings.pkl --input camera
+python recognize_faces_video.py --encodings-file encodings/linkedin_encodings.pkl --input camera
