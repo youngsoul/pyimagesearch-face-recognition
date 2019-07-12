@@ -200,3 +200,6 @@ fabric.properties
 /original_images/**/*.jpg
 /generated_images/**/*.jpg
 /encodings/faceaug_encodings.pkl
+/encodings/linkedin_encodings.pkl
+/generate_linkedin_dataset.sh
+/generate_linkedin_image_dataset.sh

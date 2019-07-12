@@ -5,6 +5,7 @@ from keras.preprocessing.image import load_img
 import numpy as np
 import argparse
 import logging
+from pathlib import Path
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -35,6 +36,11 @@ aug = ImageDataGenerator(
     fill_mode='nearest'
 )
 total = 0
+
+output_dir = args['output']
+output_path = Path(output_dir)
+output_path.mkdir(parents=True)
+
 
 # construct the actual python generator
 logging.debug("generating images...")

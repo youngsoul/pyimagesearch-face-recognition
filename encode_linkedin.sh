@@ -1,0 +1,1 @@
+python encode_faces.py --dataset generated_images --encodings-file encodings/linkedin_encodings.pkl
