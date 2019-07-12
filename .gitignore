@@ -196,3 +196,7 @@ fabric.properties
 
 /output/
 /encodings/friends_family_encodings.pkl
+
+/original_images/**/*.jpg
+/generated_images/**/*.jpg
+/encodings/faceaug_encodings.pkl
