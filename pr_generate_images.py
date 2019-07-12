@@ -39,7 +39,7 @@ total = 0
 
 output_dir = args['output']
 output_path = Path(output_dir)
-output_path.mkdir(parents=True)
+output_path.mkdir(parents=True, exist_ok=True)
 
 
 # construct the actual python generator
