@@ -198,6 +198,7 @@ fabric.properties
 /encodings/friends_family_encodings.pkl
 
 /original_images/**/*.jpg
+/original_images/**/*.png
 /generated_images/**/*.jpg
 /encodings/faceaug_encodings.pkl
 /encodings/linkedin_encodings.pkl
