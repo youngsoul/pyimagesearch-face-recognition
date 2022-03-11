@@ -4,4 +4,4 @@ face-recognition==1.2.3
 face-recognition-models==0.3.0
 imutils==0.5.2
 numpy==1.16.2
-Pillow==6.0.0
+Pillow==9.0.1
